@@ -1,30 +1,27 @@
 import collections
 
 def solution(info, edges):
-    def dfs(current_node, sheep_cnt, wolf_cnt, next_nodes):
-        nonlocal max_sheep, edges_dict
-
-        if info[current_node] == 0:    # 양이면
-            sheep_cnt += 1
+    def dfs(current_node, sheep_count, wolf_count, next_nodes):
+        nonlocal max_sheep, animal_tree
+        if info[current_node] == 0:
+            sheep_count += 1
         else:
-            wolf_cnt += 1
-        
-        if wolf_cnt >= sheep_cnt:    # 잡아먹히면 끝
+            wolf_count += 1
+        if wolf_count >= sheep_count:
             return
         
-        max_sheep = max(sheep_cnt, max_sheep)
-
-        for child in edges_dict[current_node]:
-            next_nodes.append(child)
+        max_sheep = max(max_sheep, sheep_count)
         
+        for child in animal_tree[current_node]:
+            next_nodes.append(child)
         for i, next_node in enumerate(next_nodes):
-            dfs(next_node, sheep_cnt, wolf_cnt, next_nodes[:i]+next_nodes[i+1:])
-
-    edges_dict = collections.defaultdict(list)
+            dfs(next_node, sheep_count, wolf_count, next_nodes[:i]+next_nodes[i+1:])
+    
+    
+    animal_tree = collections.defaultdict(list)
     for parent, child in edges:
-        edges_dict[parent].append(child)
+        animal_tree[parent].append(child)
     
     max_sheep = 0
     dfs(0, 0, 0, [])
-
     return max_sheep
