@@ -1,6 +1,8 @@
 def solution(cards):
     answer = []
-    visited = [False] * (len(cards)+1)
+    n = len(cards)
+    visited = [False] * (n+1)
+    
     for v in cards:
         if not visited[v]:
             temp = []
@@ -9,7 +11,8 @@ def solution(cards):
                 v = cards[v-1]
                 visited[v] = True
             answer.append(len(temp))
-    if answer[0] == len(cards):
+    
+    if answer[0] == n:
         return 0
     else:
         answer.sort(reverse=True)
