@@ -1,21 +1,19 @@
+from collections import deque
 import sys
 input = sys.stdin.readline
-from collections import deque
 
 me, bro = map(int, input().split())
 
-visited = [False] * (100000 + 1)
-que = deque([(me, 0)])
+visited = [False] * (100001)
 visited[me] = True
+que = deque([(me, 0)])
 
 while que:
-    cur, time = que.popleft()
-    if cur == bro:
+    x, time = que.popleft()
+    if x == bro:
         print(time)
         break
-
-    for next in (cur-1, cur+1, cur * 2):
-        if 0 <= next <= 100000 and not visited[next]:
-            visited[next] = True
-            que.append((next, time +1))
-            
+    for dx in [x-1, x+1, x * 2]:
+        if 0<= dx <= 100000 and not visited[dx]:
+            visited[dx] = True
+            que.append((dx, time+1))
