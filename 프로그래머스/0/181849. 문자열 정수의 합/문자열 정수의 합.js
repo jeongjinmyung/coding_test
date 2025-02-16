@@ -1,8 +1,3 @@
 function solution(num_str) {
-    var answer = 0;
-    
-    for(let nums of num_str){
-        answer += parseInt(nums);
-    }
-    return answer;
+    return [...num_str].reduce((acc, num) => acc + +num, 0)
 }
