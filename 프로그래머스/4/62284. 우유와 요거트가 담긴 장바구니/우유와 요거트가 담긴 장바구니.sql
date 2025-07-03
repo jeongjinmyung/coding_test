@@ -5,6 +5,6 @@ where cp.cart_id in (
     from cart_products
     where name in ("Milk", "Yogurt")
     group by cart_id
-    having count(distinct name) = 2
+    having count(distinct name) = 2 # 두 개를 동시에 구입
 )
-order by cp.cart_id asc;
+order by cp.cart_id;
